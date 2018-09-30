@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">IDouBan</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="hello_movies_fragment">Hello movies fragment</string>
+    <string name="hello_books_fragment">Hello books fragment</string>
+</resources>
