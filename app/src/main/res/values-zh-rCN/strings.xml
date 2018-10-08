@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">爱豆瓣</string>
+    <string name="tab_title_books">书籍</string>
+    <string name="tab_title_movies">电影</string>
+    <string name="hello_movies_fragment">电影fragment</string>
+    <string name="hello_books_fragment">书籍fragment</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+</resources>

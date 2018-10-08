@@ -5,4 +5,5 @@
 
     <string name="hello_movies_fragment">Hello movies fragment</string>
     <string name="hello_books_fragment">Hello books fragment</string>
+    <string name="title_activity_home">HomeActivity</string>
 </resources>
