@@ -47,8 +47,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private void setViewPager(ViewPager viewpager){
         DouBanPagerAdapter adapter=new DouBanPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new BooksFragment(),"书籍");
         adapter.addFragment(new MoviesFragment(),"电影");
+        adapter.addFragment(new BooksFragment(),"书籍");
+
         viewpager.setAdapter(adapter);
 
     }
