@@ -28,8 +28,9 @@ public class MoviesPresenter implements MoviesContract.Presenter {
     public MoviesPresenter(MoviesContract.View moviesView) {
 
         this.mMoviesView = moviesView;
-        // moviesView.setPresenter(this);
+         moviesView.setPresenter(this);
     }
+
 
     @Override
     public void loadMovies() {
@@ -64,6 +65,7 @@ public class MoviesPresenter implements MoviesContract.Presenter {
             }
         });
     }
+
 
 
 }

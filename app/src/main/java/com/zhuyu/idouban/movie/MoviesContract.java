@@ -7,6 +7,7 @@ import com.zhuyu.idouban.beans.Movie;
 import java.util.List;
 
 /**
+ * MVP合约类
  * Name: MoviesContract
  * Author: zhu_yu
  * Email:
@@ -16,12 +17,17 @@ import java.util.List;
 public interface MoviesContract {
 
     interface  View extends BaseView<Presenter>{
+        /**展示电影数据**/
         void showMovies(List<Movie> movies);
+        /**无数据**/
         void showNoMovies();
+        /***显示加载圈圈*/
         void showLoading(boolean active);
     }
 
     interface  Presenter extends BasePresnenter{
+
+        /**加载电影**/
         void loadMovies();
     }
 

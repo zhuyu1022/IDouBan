@@ -7,7 +7,7 @@ package com.zhuyu.idouban;
  * Comment: //TODO
  * Date: 2018-10-09 15:25
  */
-public interface BaseView<T> {
+public interface BaseView <T>{
 
     void setPresenter(T presenter);
 }

@@ -13,6 +13,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.zhuyu.idouban.MovieDetail.MovieDetailActivity;
+import com.zhuyu.idouban.MovieDetail.MovieDetailPresenter;
 import com.zhuyu.idouban.R;
 import com.zhuyu.idouban.beans.Movie;
 
@@ -96,8 +98,9 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         public void onClick(View view) {
             if (movie == null);
             Intent intent=new Intent(itemView.getContext(),MovieDetailActivity.class);
-            intent.putExtra("movie",  movie);
+           intent.putExtra("movie",  movie);
             itemView.getContext().startActivity(intent );
+
         }
     }
 

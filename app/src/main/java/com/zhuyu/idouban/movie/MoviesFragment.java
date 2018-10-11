@@ -31,23 +31,24 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MoviesFragment extends Fragment implements  MoviesContract.View{
+public class MoviesFragment extends Fragment implements MoviesContract.View {
     private static final String TAG = MoviesFragment.class.getSimpleName();
 
     public MoviesFragment() {
         // Required empty public constructor
     }
 
-    private List<Movie> mMovies=new ArrayList<>() ;
+    private List<Movie> mMovies = new ArrayList<>();
     private RecyclerView mRecyclerView;
     private ProgressBar mProgressBar;
     MoviesAdapter mAdapter;
-    MoviesPresenter mPresenter;
+    MoviesContract.Presenter mPresenter;
     private Context mContext;
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mContext=context;
+        mContext = context;
 
     }
 
@@ -58,7 +59,11 @@ public class MoviesFragment extends Fragment implements  MoviesContract.View{
         View view = inflater.inflate(R.layout.fragment_movies, container, false);
         mRecyclerView = view.findViewById(R.id.movie_recyclerView);
         mProgressBar = view.findViewById(R.id.movie_progressBar);
-
+        mRecyclerView.setHasFixedSize(true);
+        GridLayoutManager layoutManager = new GridLayoutManager(getActivity().getApplicationContext(), 2);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new MoviesAdapter(mMovies, getActivity().getApplicationContext(), R.layout.recyclerview_movies_item);
+        mRecyclerView.setAdapter(mAdapter);
         return view;
     }
 
@@ -66,19 +71,9 @@ public class MoviesFragment extends Fragment implements  MoviesContract.View{
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mRecyclerView.setHasFixedSize(true);
-        GridLayoutManager layoutManager=new GridLayoutManager(getActivity().getApplicationContext(),2);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MoviesAdapter(mMovies, getActivity().getApplicationContext(), R.layout.recyclerview_movies_item);
-        mRecyclerView.setAdapter(mAdapter);
-        createPresenter();
 
-    }
-
-
-    private void createPresenter(){
-        mPresenter=new MoviesPresenter(this);
         mPresenter.loadMovies();
+
     }
 
 
@@ -96,15 +91,15 @@ public class MoviesFragment extends Fragment implements  MoviesContract.View{
 
     @Override
     public void showLoading(boolean active) {
-            if(active){
-                mProgressBar.setVisibility(View.VISIBLE);
-            }else{
-                mProgressBar.setVisibility(View.INVISIBLE);
-            }
+        if (active) {
+            mProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            mProgressBar.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
     public void setPresenter(MoviesContract.Presenter presenter) {
-
+        mPresenter = presenter;
     }
 }

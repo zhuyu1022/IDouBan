@@ -15,6 +15,7 @@ import android.view.View;
 
 import com.zhuyu.idouban.book.BooksFragment;
 import com.zhuyu.idouban.movie.MoviesFragment;
+import com.zhuyu.idouban.movie.MoviesPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,14 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
+
+        initView( );
+    }
+
+
+    private void initView( ) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -36,37 +45,36 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-
-        ViewPager viewPager=findViewById(R.id.home_viewPager);
-        TabLayout tabLayout=findViewById(R.id.home_tablayout);
-        setViewPager(viewPager);
+        ViewPager viewPager = findViewById(R.id.home_viewPager);
+        TabLayout tabLayout = findViewById(R.id.home_tablayout);
         tabLayout.setupWithViewPager(viewPager);
+        DouBanPagerAdapter adapter = new DouBanPagerAdapter(getSupportFragmentManager());
+        MoviesFragment movieFragment = new MoviesFragment();
+        BooksFragment bookFragment = new BooksFragment();
+        adapter.addFragment(movieFragment, "电影");
+        adapter.addFragment(bookFragment, "书籍");
+        viewPager.setAdapter(adapter);
+
+        //初始化presenter，传入view进行关联
+         new MoviesPresenter(movieFragment);
     }
 
 
-    private void setViewPager(ViewPager viewpager){
-        DouBanPagerAdapter adapter=new DouBanPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new MoviesFragment(),"电影");
-        adapter.addFragment(new BooksFragment(),"书籍");
-
-        viewpager.setAdapter(adapter);
-
-    }
 
 
 
-    private class DouBanPagerAdapter extends FragmentPagerAdapter{
 
-        private List<Fragment> mFragmentList=new ArrayList<>();
-        private List<String> mTitles=new ArrayList<>();
+    private class DouBanPagerAdapter extends FragmentPagerAdapter {
+
+        private List<Fragment> mFragmentList = new ArrayList<>();
+        private List<String> mTitles = new ArrayList<>();
 
         public DouBanPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
 
-        public void addFragment(Fragment fragment ,String title){
+        public void addFragment(Fragment fragment, String title) {
             mFragmentList.add(fragment);
             mTitles.add(title);
         }
